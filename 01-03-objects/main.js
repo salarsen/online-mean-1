@@ -18,7 +18,7 @@ function stealAnItem(stealer,jason,item){
     return false;
 }
 
-var charlie = personCreator('Charlie', ['wallet', 'keys']);
+var charlie = personCreator('Charlie', ['wallet', 'gtkeys']);
 var jason = personCreator('Jason', ['chapstick', 'keys', 'phone']);
 
 // Get this to work!
