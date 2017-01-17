@@ -18,6 +18,10 @@ function personCreator(name,items){
     return personObj;
 }
 
+personCreator.prototype.stealFrom(victim,item){
+    
+}
+
 var spencer = personCreator('Spencer',['wallet','keys']);
 var julia = personCreator('Julia',['chapstick','keys','phone']);
 
