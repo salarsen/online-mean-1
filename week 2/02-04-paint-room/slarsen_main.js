@@ -1,65 +1,119 @@
-function orderSupplies(item, callback) {
+// function orderSupplies(item, callback) {
+//     var warehouse; // undefined
+//     var deliveryTime = Math.random() * 3000;
+//     setTimeout(function () {
+//         warehouse = {
+//             paint: {
+//                 product: "Neon Green Paint",
+//                 directions: function () {
+//                     console.log(deliveryTime/1000,'s');
+//                     return "mix it!";
+//                 }
+//             },
+//             brush: {
+//                 product: "Horsehair brush",
+//                 directions: function () {
+//                     console.log(deliveryTime/1000,'s');
+//                     return "start painting!";
+//                 }
+//             }
+//         };
+//         callback(warehouse[item]);
+//     }, deliveryTime);
+// }
+//
+//
+// function printDelivery(item){
+//     var output = `${item.product} received, time to ${item.directions()}`;
+//     console.log(output);
+//     return true;
+// }
+
+// var paintTest; // undefined until we have a result from the paint delivery
+//
+// orderSupplies('paint', function(item){
+//     paintTest = printDelivery(item); // set parent variable to true
+// });
+//
+// orderSupplies('brush', function(item){
+//     var testInt = setInterval(function(){
+//         if(paintTest){ // will loop until we have a true for paintTest.
+//             clearInterval(testInt); // do not remove unless you want to infinite loop...
+//             printDelivery(item); //print now that we know we have the paint supplies...
+//             // console.log("clearing interval");
+//         }
+//     },0)
+// });
+
+// var paint;
+// var brush;
+// orderSupplies('brush',function(item){
+//     brush = item;
+//     if(paint){
+//         printDelivery(brush);
+//     }
+// });
+//
+// orderSupplies('paint',function(item){
+//     paint = item;
+//     printDelivery(paint);
+//     if(brush){
+//         printDelivery(brush);
+//     }
+// });
+
+function orderSupplies(item) {
     var warehouse; // undefined
     var deliveryTime = Math.random() * 3000;
-    setTimeout(function () {
-        warehouse = {
-            paint: {
-                product: "Neon Green Paint",
-                directions: function () {
-                    console.log(deliveryTime/1000,'s');
-                    return "mix it!";
+    return new Promise(function(resolve,reject){
+        setTimeout(function () {
+            warehouse = {
+                paint: {
+                    product: "Neon Green Paint",
+                    directions: function () {
+                        console.log(deliveryTime/1000);
+                        return "mix it!";
+                    }
+                },
+                brush: {
+                    product: "Horsehair brush",
+                    directions: function () {
+                        console.log(deliveryTime/1000);
+                        return "start painting!";
+                    }
                 }
-            },
-            brush: {
-                product: "Horsehair brush",
-                directions: function () {
-                    console.log(deliveryTime/1000,'s');
-                    return "start painting!";
-                }
+            };
+            if(warehouse[item]){
+                resolve(warehouse[item]);
+            } else {
+                reject(`${item} is not available`);
             }
-        };
-        callback(warehouse[item]);
-    }, deliveryTime);
+        }, deliveryTime);
+    });
 }
-
 
 function printDelivery(item){
-    var output = `${item.product} received, time to ${item.directions()}`;
-    console.log(output);
-    return true;
+    console.log(`${item.product} received, time to ${item.directions()}`);
 }
 
-var paintTest; // undefined until we have a result from the paint delivery
+var paint = orderSupplies('paint');
+var brush = orderSupplies('brush');
+var tarp = orderSupplies('tarp');
 
-orderSupplies('paint', function(item){
-    paintTest = printDelivery(item); // set parent variable to true
+// paint.then(printDelivery);
+// brush.then(printDelivery);
+
+paint.then(function(item){
+    printDelivery(item);
+    return brush.then(function(item){
+        printDelivery(item);
+    });
+})
+.catch(function(error){
+    console.log(error)
 });
 
-orderSupplies('brush', function(item){
-    var testInt = setInterval(function(){
-        if(paintTest){ // will loop until we have a true for paintTest.
-            clearInterval(testInt); // do not remove unless you want to infinite loop...
-            printDelivery(item); //print now that we know we have the paint supplies...
-            // console.log("clearing interval");
-        }
-    },0)
-});
 
-
-
-// orderSupplies('paint',function(item){
-//     printDelivery(item);
-//     orderSupplies('brush',function(item){
-//         printDelivery(item);
-//     });
-// })
-
-
-/*
-Neon Green Paint received, time to mix it!
-Horsehair brush received, time to start painting!
-*/
-
-// orderSupplies(function(item){
-//
-// })
+tarp.catch(function(error){
+    console.log(error)
+})
