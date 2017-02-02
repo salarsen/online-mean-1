@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Author List</title>
+   </head>
+   <body>
+      <div class="">
+         <table>
+            <thead>
+               <tr>
+                  <th>Author Name</th>
+                  <th>Age</th>
+                  <th>Is Alive</th>
+                  <th>Books</th>
+               </tr>
+            </thead>
+            <tbody>
+               <% for (let author of authors) { %>
+                  <tr>
+                     <td><%= author.name %></td>
+                     <td><%= author.age %></td>
+                     <td><%= author.isAlive %></td>
+                     <% for (book in author.books) { %>
+                     <td>
+                         <%= book.id %>
+                     </td>
+                     <% } %>
+                  </tr>
+               <% } %>
+            </tbody>
+         </table>
+      </div>
+   </body>
+</html>
