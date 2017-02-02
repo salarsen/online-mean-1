@@ -48,13 +48,14 @@ var Animal = mongoose.model('Animal', animalSchema);
 mongoose.Promise = global.Promise;
 
 app.get('/', function(request, response) {
-  Animal.find({})
-    .then(function(animals) {
-      response.json(animals);
-    })
-    .catch(function(error) {
-      console.error(error);
-    })
+  // Animal.find({})
+  //   .then(function(animals) {
+  //     response.json(animals);
+  //   })
+  //   .catch(function(error) {
+  //     console.error(error);
+  //   })
+  response.render('index');
 });
 
 app.listen(8008, function(){
