@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Show Author</title>
+</head>
+<body>
+  <main>
+    <article class="">
+      <h1>Author Details</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Name: </th>
+            <th>age: </th>
+            <th>isAlive: </th>
+            <th>Books: </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= author.name %></td>
+            <td><%= author.age %></td>
+            <td><%= author.isAlive %></td>
+            <td>
+              <ul>
+                <% for(const book of author.books) { %>
+                  <li><%= book.title %></li>
+                <% } %>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+  </main>
+</body>
+</html>
