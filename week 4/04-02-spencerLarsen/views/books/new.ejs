@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<<<<<<< HEAD
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Add Book</title>
+   </head>
+   <body>
+      <div class="">
+         <form class="" action="/books/create" method="post">
+            <label for="title">Title</label><input type="text" name="title" placeholder="Book Title">
+            <label for="publishDate">Publish Date:</label><input type="date" name="publishDate" placeholder="Publish Date">
+            <label for="pageCount">Page Count:</label><input type="number" name="pageCount">
+            <label for="subject">Subject:</label><input type="text" name="subject" placeholder="Book Subject">
+            <label for="author">Author:</label>
+            <select class="" name="author">
+               <% for (let author of authors) { %>
+                  <option value="<%= author._id %>"><%= author.name %></option>
+               <% } %>
+            </select>
+            <input type="submit" name="Submit" value="Submit">
+         </form>
+      </div>
+   </body>
+=======
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New Book</title>
+</head>
+<body>
+  <!-- title: String,
+  publishDate: Date,
+  pagecount: Number,
+  subject: String,
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'Author'
+  } -->
+  <main>
+    <article>
+      <h1>Make a book</h1>
+      <form action="/books/create" method='post'>
+        <label for="title">
+          <input type="text" name='title' placeholder='title'><br>
+        </label>
+
+        <label for="pagecount">
+          <input type="number" name ='pagecount' placeholder='pageCount'><br>
+        </label>
+
+        <label for="subject">
+          <input type="text" name='subject' placeholder='subject'><br>
+        </label>
+
+        <label for="publishDate">
+          <input type="date" name='publishDate'><br>
+        </label>
+
+        <label for="author">
+          <select name="author" id="author"><br>
+            <% for(const author of authors) {%>
+              <option value="<%= author._id %>">
+                <%= author.name %>
+              </option>
+            <% } %>
+          </select>
+        </label>
+
+        <button>Add Book!</button>
+      </form>
+    </article>
+  </main>
+</body>
+>>>>>>> 07e2b3d17631d3a0448815c7b8fdd6161d3f4a0c
+</html>

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html>
    <head>
       <meta charset="utf-8">
@@ -32,4 +33,41 @@
          <a href="/"><button type="button" name="button">Back</button></a>
       </div>
    </body>
+=======
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Books</title>
+</head>
+<body>
+  <h1>All Books</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Subject</th>
+        <th>Page Count</th>
+        <th>Publish Date</th>
+        <th>Author</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(let book of books) { %>
+        <tr>
+          <td><%= book.title %></td>
+          <td><%= book.subject %></td>
+          <td><%= book.pageCount %></td>
+          <td><%= book.publishDate %></td>
+          <td><%= book.author.name %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+
+  <a href="/">
+    <button>Root</button>
+  </a>
+</body>
+>>>>>>> 07e2b3d17631d3a0448815c7b8fdd6161d3f4a0c
 </html>

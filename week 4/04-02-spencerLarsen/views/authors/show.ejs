@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html>
    <head>
       <meta charset="utf-8">
@@ -32,4 +33,42 @@
          <a href="/"><button type="button" name="button">Back</button></a>
       </table>
    </body>
+=======
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Show Author</title>
+</head>
+<body>
+  <main>
+    <article class="">
+      <h1>Author Details</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Name: </th>
+            <th>age: </th>
+            <th>isAlive: </th>
+            <th>Books: </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= author.name %></td>
+            <td><%= author.age %></td>
+            <td><%= author.isAlive %></td>
+            <td>
+              <ul>
+                <% for(const book of author.books) { %>
+                  <li><%= book.title %></li>
+                <% } %>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+  </main>
+</body>
+>>>>>>> 07e2b3d17631d3a0448815c7b8fdd6161d3f4a0c
 </html>
