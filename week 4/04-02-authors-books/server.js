@@ -34,6 +34,12 @@ const AuthorSchema = new Schema({
   name: String,
   age: Number,
   isAlive: Boolean,
+  /*
+   {
+      type: Boolean,
+      default: true
+   }
+  */
   books: [{
      type: Schema.Types.ObjectId,
      ref: 'Book'
@@ -57,18 +63,72 @@ const Book = mongoose.model('Book',BookSchema);
 
 app.get('/',function(request,response){
    response.render('index');
-})
-.get('/authors/new',function(request,response){
-   response.render('authors/new');
-})
-.get('/authors',function(request,response){
+});
+
+app.get('/authors',function(request,response){
    Author.find({})
+      .populate('books')
+      .exec()
       .then(function(authors){
+         console.log(authors);
          response.render('authors/index',{ authors });
       })
       .catch(function(error){
          response.json(error);
       })
+})
+.get('/authors/:id', function(request,response){
+   console.log(request.params);
+   Author.findById(request.params.id)
+   .populate('books')
+   .exec()
+      .then(function(author){
+         response.render('authors/show', {author});
+      })
+      .catch(function(error){
+         response.json(error);
+      });
+})
+.get('/authors/new',function(request,response){
+   response.render('authors/new');
+})
+.post('/authors/create',function(request,response){
+   console.log(request.body);
+
+   request.body.isAlive = !!request.body.isAlive; //undefined right ! turns into boolean and true, if defined, left keeps it as is
+
+   Author.create(request.body)
+      .then(function(user){
+         console.log(user);
+         response.redirect('/authors');
+      })
+      .catch(function(error){
+         console.log(error);
+         response.json(error);
+      });
+});
+
+
+app.get('/books',function(request,response){
+   Book.find({})
+      .populate('author')
+      .then(function(books){
+         response.render('books/index', {books} );
+      })
+      .catch(function(error){
+         response.json(error);
+      });
+})
+.get('/books/:id', function(request,response){
+   Book.findById(request.params.id)
+   .populate('author')
+   .exec()
+      .then(function(book){
+         response.render('books/show', {book});
+      })
+      .catch(function(error){
+         response.json(error);
+      });
 })
 .get('/books/new',function(request,response){
    Author.find({})
@@ -79,31 +139,15 @@ app.get('/',function(request,response){
          response.json(error);
       });
 })
-.post('/authors/create',function(request,response){
-   console.log(request.body);
-   Author.create(request.body)
-      .then(function(user){
-         console.log(user);
-         response.redirect('/authors');
-      })
-      .catch(function(error){
-         console.log(error);
-         response.json(error);
-      });
-})
 .post('/books/create',function(request,response){
    // console.log(request.body);
    Book.create(request.body)
       .then(function(user){
-         Author.update({_id : user.author},{$addToSet: {books : user.id}})
+         return Author.update({_id : user.author},{$addToSet: {books : user.id}})
             .then(function(auth_update){
-               // console.log(auth_update);
+               console.log(auth_update);
                response.redirect('/');
             })
-            .catch(function(error){
-               console.log(error);
-               response.json(error);
-            });
       })
       .catch(function(error){
          console.log(error);
@@ -127,7 +171,10 @@ app.get('/',function(request,response){
     author: Author
 */
 
-
+function handleError(response,error){
+   // log the error
+   response.status(500).json(error);
+}
 
 
 app.listen(port,function(){

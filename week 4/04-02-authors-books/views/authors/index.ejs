@@ -18,18 +18,22 @@
             <tbody>
                <% for (let author of authors) { %>
                   <tr>
-                     <td><%= author.name %></td>
+                     <td><a href="/authors/<%= author.id %>"><%= author.name %></a></td>
                      <td><%= author.age %></td>
                      <td><%= author.isAlive %></td>
-                     <% for (book in author.books) { %>
                      <td>
-                         <%= book.id %>
+                        <ul>
+                           <% for (const book of author.books) { %>
+                              <li><a href="/books/<%= book.id %>"><%= book.title %></a></li>
+                           <% } %>
+                        </ul>
                      </td>
-                     <% } %>
+
                   </tr>
                <% } %>
             </tbody>
          </table>
+         <a href="/"><button type="button" name="button">Back</button></a>
       </div>
    </body>
 </html>
