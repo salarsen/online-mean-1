@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
 <html>
    <head>
       <meta charset="utf-8">
@@ -37,47 +36,4 @@
          <a href="/"><button type="button" name="button">Back</button></a>
       </div>
    </body>
-=======
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Authors</title>
-</head>
-<body>
-  <main>
-    <section>
-      <article class="">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Age</th>
-              <th>Alive?</th>
-              <th>Books Count</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% for(let author of authors) { %>
-              <tr>
-                <td>
-                  <a href="/authors/<%= author._id %>">
-                    <%= author.name %>
-                  </a>
-                </td>
-                <td><%= author.age %></td>
-                <td><%= author.isAlive %></td>
-                <td><%= author.books.length %></td>
-              </tr>
-            <% } %>
-          </tbody>
-        </table>
-
-        <a href="/">
-          <button>Back</button>
-        </a>
-      </article>
-    </section>
-  </main>
-</body>
->>>>>>> 07e2b3d17631d3a0448815c7b8fdd6161d3f4a0c
 </html>
